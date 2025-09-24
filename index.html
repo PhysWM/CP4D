@@ -764,71 +764,57 @@
         <!-- 静态新视角生成 -->
         <div class="mb-6 video-comparison">
           <h2 class="title is-4 has-text-centered mb-4 section-title">Static novel-view generation</h2>
-          <div class="columns is-centered is-multiline has-text-centered">
-            <div class="column is-one-quarter-desktop is-half-tablet is-full-mobile">
-              <div class="box">
-                <video poster="" autoplay controls muted loop style="width: 100%; height: auto;">
-                  <source src="static/videos/multiview/scene_8_0.mp4" type="video/mp4">
-                  Your browser does not support the video tag.
-                </video>
-                <p class="has-text-weight-semibold mt-2">View 1</p>
-              </div>
-            </div>
-            <div class="column is-one-quarter-desktop is-half-tablet is-full-mobile">
-              <div class="box">
-                <video poster="" autoplay controls muted loop style="width: 100%; height: auto;">
-                  <source src="static/videos/multiview/scene_8_1.mp4" type="video/mp4">
-                  Your browser does not support the video tag.
-                </video>
-                <p class="has-text-weight-semibold mt-2">View 2</p>
-              </div>
-            </div>
-          </div>
-        </div>
 
-        <!-- 第二组静态视角 -->
+        <!-- 第二组和第三组静态视角合并 -->
         <div class="mb-6 video-comparison">
-          <div class="columns is-centered is-multiline has-text-centered">
-            <div class="column is-one-quarter-desktop is-half-tablet is-full-mobile">
-              <div class="box">
-                <video poster="" autoplay controls muted loop style="width: 100%; height: auto;">
-                  <source src="static/videos/multiview/scene_24_0.mp4" type="video/mp4">
-                  Your browser does not support the video tag.
-                </video>
-                <p class="has-text-weight-semibold mt-2">View 1</p>
+          <div class="columns is-centered is-multiline">
+            <!-- 第二组静态视角 -->
+            <div class="column is-half-desktop is-full-tablet">
+              <h2 class="title is-5 has-text-centered mb-3 section-title">Scene 1</h2>
+              <div class="columns is-centered is-multiline has-text-centered">
+                <div class="column is-half-desktop is-half-tablet is-full-mobile">
+                  <div class="box">
+                    <video poster="" autoplay controls muted loop style="width: 100%; height: auto;">
+                      <source src="static/videos/multiview/scene_24_0.mp4" type="video/mp4">
+                      Your browser does not support the video tag.
+                    </video>
+                    <p class="has-text-weight-semibold mt-2">View 1</p>
+                  </div>
+                </div>
+                <div class="column is-half-desktop is-half-tablet is-full-mobile">
+                  <div class="box">
+                    <video poster="" autoplay controls muted loop style="width: 100%; height: auto;">
+                      <source src="static/videos/multiview/scene_24_1.mp4" type="video/mp4">
+                      Your browser does not support the video tag.
+                    </video>
+                    <p class="has-text-weight-semibold mt-2">View 2</p>
+                  </div>
+                </div>
               </div>
             </div>
-            <div class="column is-one-quarter-desktop is-half-tablet is-full-mobile">
-              <div class="box">
-                <video poster="" autoplay controls muted loop style="width: 100%; height: auto;">
-                  <source src="static/videos/multiview/scene_24_1.mp4" type="video/mp4">
-                  Your browser does not support the video tag.
-                </video>
-                <p class="has-text-weight-semibold mt-2">View 2</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 第三组静态视角 -->
-        <div class="mb-6 video-comparison">
-          <div class="columns is-centered is-multiline has-text-centered">
-            <div class="column is-one-quarter-desktop is-half-tablet is-full-mobile">
-              <div class="box">
-                <video poster="" autoplay controls muted loop style="width: 100%; height: auto;">
-                  <source src="static/videos/multiview/scene_30_0.mp4" type="video/mp4">
-                  Your browser does not support the video tag.
-                </video>
-                <p class="has-text-weight-semibold mt-2">View 1</p>
-              </div>
-            </div>
-            <div class="column is-one-quarter-desktop is-half-tablet is-full-mobile">
-              <div class="box">
-                <video poster="" autoplay controls muted loop style="width: 100%; height: auto;">
-                  <source src="static/videos/multiview/scene_30_1.mp4" type="video/mp4">
-                  Your browser does not support the video tag.
-                </video>
-                <p class="has-text-weight-semibold mt-2">View 2</p>
+            
+            <!-- 第三组静态视角 -->
+            <div class="column is-half-desktop is-full-tablet">
+              <h2 class="title is-5 has-text-centered mb-3 section-title">Scene 2</h2>
+              <div class="columns is-centered is-multiline has-text-centered">
+                <div class="column is-half-desktop is-half-tablet is-full-mobile">
+                  <div class="box">
+                    <video poster="" autoplay controls muted loop style="width: 100%; height: auto;">
+                      <source src="static/videos/multiview/scene_30_0.mp4" type="video/mp4">
+                      Your browser does not support the video tag.
+                    </video>
+                    <p class="has-text-weight-semibold mt-2">View 1</p>
+                  </div>
+                </div>
+                <div class="column is-half-desktop is-half-tablet is-full-mobile">
+                  <div class="box">
+                    <video poster="" autoplay controls muted loop style="width: 100%; height: auto;">
+                      <source src="static/videos/multiview/scene_30_1.mp4" type="video/mp4">
+                      Your browser does not support the video tag.
+                    </video>
+                    <p class="has-text-weight-semibold mt-2">View 2</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -904,7 +890,7 @@
         </h1>
 
         <div class="mb-6 video-comparison">
-          <h2 class="title is-4 has-text-centered mb-4 section-title">Material and interaction optimization</h2>
+          <h2 class="title is-4 has-text-centered mb-4 section-title">Material and relative position refinement (in stage II: physically grounded motion simulation)</h2>
           <div class="columns is-centered is-multiline has-text-centered">
             <div class="column is-one-quarter-desktop is-half-tablet is-full-mobile">
               <div class="box">
@@ -921,7 +907,7 @@
                   <source src="static/videos/ablation/wo_material.mp4" type="video/mp4">
                   Your browser does not support the video tag.
                 </video>
-                <p class="has-text-weight-semibold mt-2">w/o material opt.</p>
+                <p class="has-text-weight-semibold mt-2">w/o material refinement</p>
               </div>
             </div>
             <div class="column is-one-quarter-desktop is-half-tablet is-full-mobile">
@@ -930,14 +916,14 @@
                   <source src="static/videos/ablation/wo_offset.mp4" type="video/mp4">
                   Your browser does not support the video tag.
                 </video>
-                <p class="has-text-weight-semibold mt-2">w/o offset opt.</p>
+                <p class="has-text-weight-semibold mt-2">w/o relative position refinement</p>
               </div>
             </div>
           </div>
         </div>
 
         <div class="mb-6 video-comparison">
-          <h2 class="title is-4 has-text-centered mb-4 section-title">Scale and position optimization</h2>
+          <h2 class="title is-4 has-text-centered mb-4 section-title">Scale and position initialization (in stage III: automated 4D scene composition)</h2>
           <div class="columns is-centered is-multiline has-text-centered">
             <div class="column is-one-quarter-desktop is-half-tablet is-full-mobile">
               <div class="box">
@@ -954,7 +940,7 @@
                   <source src="static/videos/ablation/wo_scale.mp4" type="video/mp4">
                   Your browser does not support the video tag.
                 </video>
-                <p class="has-text-weight-semibold mt-2">w/o scale opt.</p>
+                <p class="has-text-weight-semibold mt-2">w/o scale initialization</p>
               </div>
             </div>
             <div class="column is-one-quarter-desktop is-half-tablet is-full-mobile">
@@ -963,7 +949,7 @@
                   <source src="static/videos/ablation/wo_pos.mp4" type="video/mp4">
                   Your browser does not support the video tag.
                 </video>
-                <p class="has-text-weight-semibold mt-2">w/o position opt.</p>
+                <p class="has-text-weight-semibold mt-2">w/o position initialization</p>
               </div>
             </div>
           </div>
