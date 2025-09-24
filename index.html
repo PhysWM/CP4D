@@ -108,6 +108,145 @@
       transform: translateY(-2px);
       box-shadow: 0 6px 20px rgba(0,0,0,0.2);
     }
+
+    /* Sidebar Navigation Styles */
+    .sidebar-nav {
+      position: fixed;
+      top: 0;
+      left: -300px;
+      width: 300px;
+      height: 100vh;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      z-index: 1000;
+      transition: left 0.3s ease;
+      box-shadow: 5px 0 15px rgba(0,0,0,0.1);
+    }
+
+    .sidebar-nav.active {
+      left: 0;
+    }
+
+    .sidebar-nav-content {
+      padding: 2rem 1.5rem;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sidebar-nav-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .sidebar-nav-header h3 {
+      margin: 0;
+      color: white;
+      font-weight: 600;
+    }
+
+    .sidebar-toggle {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.2rem;
+      cursor: pointer;
+      padding: 0.5rem;
+      border-radius: 50%;
+      transition: background-color 0.3s ease;
+    }
+
+    .sidebar-toggle:hover {
+      background-color: rgba(255,255,255,0.1);
+    }
+
+    .sidebar-nav-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      flex: 1;
+    }
+
+    .sidebar-nav-list li {
+      margin-bottom: 0.5rem;
+    }
+
+    .sidebar-nav-link {
+      display: block;
+      padding: 1rem 1.5rem;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      font-weight: 500;
+      position: relative;
+    }
+
+    .sidebar-nav-link:hover {
+      background-color: rgba(255,255,255,0.1);
+      transform: translateX(-5px);
+    }
+
+    .sidebar-nav-link.active {
+      background-color: rgba(255,255,255,0.2);
+      font-weight: 600;
+    }
+
+    .sidebar-nav-link.active::before {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 4px;
+      height: 20px;
+      background-color: white;
+      border-radius: 2px 0 0 2px;
+    }
+
+    .sidebar-toggle-btn {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 1001;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border: none;
+      color: white;
+      padding: 1rem;
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      transition: all 0.3s ease;
+      font-size: 1.2rem;
+    }
+
+    .sidebar-toggle-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+    }
+
+    .sidebar-toggle-btn.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* Mobile responsive */
+    @media (max-width: 768px) {
+      .sidebar-nav {
+        width: 100%;
+        left: -100%;
+      }
+      
+      .sidebar-toggle-btn {
+        top: 15px;
+        left: 15px;
+        padding: 0.8rem;
+        font-size: 1rem;
+      }
+    }
   </style>
 
   <!-- Scripts -->
@@ -117,6 +256,87 @@
   <script src="static/js/bulma-carousel.min.js"></script>
   <script src="static/js/bulma-slider.min.js"></script>
   <script src="static/js/index.js"></script>
+  
+  <!-- Sidebar Navigation JavaScript -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const sidebar = document.getElementById('sidebar-nav');
+      const toggleBtn = document.getElementById('sidebar-toggle-btn');
+      const closeBtn = document.getElementById('sidebar-toggle');
+      const navLinks = document.querySelectorAll('.sidebar-nav-link');
+      
+      // Toggle sidebar
+      function toggleSidebar() {
+        sidebar.classList.toggle('active');
+        toggleBtn.classList.toggle('hidden');
+      }
+      
+      // Close sidebar
+      function closeSidebar() {
+        sidebar.classList.remove('active');
+        toggleBtn.classList.remove('hidden');
+      }
+      
+      // Event listeners
+      toggleBtn.addEventListener('click', toggleSidebar);
+      closeBtn.addEventListener('click', closeSidebar);
+      
+      // Close sidebar when clicking on nav links
+      navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+          closeSidebar();
+        });
+      });
+      
+      // Close sidebar when clicking outside
+      document.addEventListener('click', function(e) {
+        if (!sidebar.contains(e.target) && !toggleBtn.contains(e.target) && sidebar.classList.contains('active')) {
+          closeSidebar();
+        }
+      });
+      
+      // Active link highlighting based on scroll position
+      function updateActiveLink() {
+        const sections = document.querySelectorAll('section[id], #top');
+        const scrollPos = window.scrollY + 100;
+        
+        sections.forEach(section => {
+          const sectionTop = section.offsetTop;
+          const sectionHeight = section.offsetHeight;
+          const sectionId = section.id || 'top';
+          
+          if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+            navLinks.forEach(link => {
+              link.classList.remove('active');
+              if (link.getAttribute('href') === '#' + sectionId) {
+                link.classList.add('active');
+              }
+            });
+          }
+        });
+      }
+      
+      // Update active link on scroll
+      window.addEventListener('scroll', updateActiveLink);
+      
+      // Smooth scrolling for nav links
+      navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          const targetId = this.getAttribute('href').substring(1);
+          const targetElement = targetId === 'top' ? document.body : document.getElementById(targetId);
+          
+          if (targetElement) {
+            const offsetTop = targetId === 'top' ? 0 : targetElement.offsetTop - 80;
+            window.scrollTo({
+              top: offsetTop,
+              behavior: 'smooth'
+            });
+          }
+        });
+      });
+    });
+  </script>
 </head>
 <body id="top">
 
@@ -195,7 +415,7 @@
 
 
 <!-- Pipeline Figure -->
-<section class="section">
+<section class="section" id="framework">
   <div class="container is-max-desktop">
     <div class="columns is-centered">
       <div class="column is-four-fifths">
@@ -618,13 +838,13 @@
     </div>
   </section>
 
-  <!-- Novel-view Synthesis Gallery -->
-  <section class="hero is-light has-background-white-bis py-6" id="novel-view">
+  <!-- Editing Synthesis Gallery -->
+  <section class="hero is-light has-background-white-bis py-6" id="editing">
     <div class="hero-body">
       <div class="container">
 
         <h1 class="title is-2 has-text-centered mb-6 section-title">
-          <span class="icon mr-2"><i class="fas fa-camera"></i></span>
+          <span class="icon mr-2"><i class="fas fa-edit"></i></span>
           Editing Synthesis Gallery
         </h1>
 
@@ -669,13 +889,17 @@
           </div>
         </div>
 
-  <!-- Novel-view Synthesis Gallery -->
-  <section class="hero is-light has-background-white-bis py-6" id="novel-view">
+      </div>
+    </div>
+  </section>
+
+  <!-- Ablation Studies Gallery -->
+  <section class="hero is-light has-background-white-bis py-6" id="ablation">
     <div class="hero-body">
       <div class="container">
 
         <h1 class="title is-2 has-text-centered mb-6 section-title">
-          <span class="icon mr-2"><i class="fas fa-camera"></i></span>
+          <span class="icon mr-2"><i class="fas fa-flask"></i></span>
           Ablation Studies Gallery
         </h1>
 
@@ -745,7 +969,35 @@
           </div>
         </div>
 
+      </div>
+    </div>
+  </section>
 
+  <!-- Sidebar Navigation -->
+  <nav class="sidebar-nav" id="sidebar-nav">
+    <div class="sidebar-nav-content">
+      <div class="sidebar-nav-header">
+        <h3 class="title is-6 has-text-white">Navigation</h3>
+        <button class="sidebar-toggle" id="sidebar-toggle">
+          <span class="icon"><i class="fas fa-times"></i></span>
+        </button>
+      </div>
+      <ul class="sidebar-nav-list">
+        <li><a href="#top" class="sidebar-nav-link">Home</a></li>
+        <li><a href="#abstract" class="sidebar-nav-link">Abstract</a></li>
+        <li><a href="#framework" class="sidebar-nav-link">Framework Overview</a></li>
+        <li><a href="#video-comparison" class="sidebar-nav-link">Video Comparison Gallery</a></li>
+        <li><a href="#novel-view" class="sidebar-nav-link">Novel-view Synthesis Gallery</a></li>
+        <li><a href="#editing" class="sidebar-nav-link">Editing Synthesis Gallery</a></li>
+        <li><a href="#ablation" class="sidebar-nav-link">Ablation Studies Gallery</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Sidebar Toggle Button -->
+  <button class="sidebar-toggle-btn" id="sidebar-toggle-btn">
+    <span class="icon"><i class="fas fa-bars"></i></span>
+  </button>
 
   <!-- Back to Top Button -->
   <a href="#top" class="button is-primary is-rounded back-to-top">
